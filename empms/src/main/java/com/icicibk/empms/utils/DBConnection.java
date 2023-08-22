@@ -14,12 +14,14 @@ public class DBConnection {
 	public static Connection getConnection() {
 		
 		Connection connection = null;
-		InputStream inputStream = DBConnection.class
-				.getResourceAsStream("application.properties");
+		
 		
 		Properties properties=new Properties();
-		try {
+		try(InputStream inputStream = DBConnection.class.getClassLoader().
+				getResourceAsStream("application.properties")) {
+			System.out.println(inputStream==null);
 			properties.load(inputStream);
+			System.out.println(properties);
 			connection = DriverManager.getConnection(
 					properties.getProperty("db.url"), 
 					properties.getProperty("db.userName"), 

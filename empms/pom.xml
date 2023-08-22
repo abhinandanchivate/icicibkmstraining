@@ -8,6 +8,13 @@
   <artifactId>empms</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
+	  <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>6.0.9</version>
+</dependency>
+
 	  <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 <dependency>
     <groupId>com.mysql</groupId>
@@ -17,12 +24,14 @@
 
 	  <!-- we will specify the reqd lib dependency details .-->
 	  <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 <dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
-    <version>1.18.24</version>
+    <version>1.18.28</version>
     <scope>provided</scope>
 </dependency>
+
 
   </dependencies>
 </project>

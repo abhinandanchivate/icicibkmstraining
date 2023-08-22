@@ -2,10 +2,16 @@ package com.icicibk.empms.dto;
 
 import java.util.Objects;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
+	
 	
 	private String empId;
 	private String empFirstName;
