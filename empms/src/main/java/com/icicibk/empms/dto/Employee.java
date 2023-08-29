@@ -10,6 +10,7 @@ import lombok.Singular;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Employee {
 	
 	

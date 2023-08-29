@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.icicibk.empms.dto.Employee;
@@ -21,6 +22,8 @@ import com.icicibk.empms.utils.DBConnection;
 // of repo implementation.
 public class EmployeeRepostioryImpl implements EmployeeRepository {
 
+	@Autowired
+	DBConnection dbConnection;
 	
 
 	@Override
@@ -33,7 +36,7 @@ public class EmployeeRepostioryImpl implements EmployeeRepository {
 		String insertStatement = "insert into employee"
 				+ " (empId, empFirstName, empLastName, empAddress, empSalary, contactNumber) " + "values(?,?,?,?,?,?)";
 
-		connection = DBConnection.getConnection();
+		connection = dbConnection.getConnection();
 		// 2. provide the details
 
 		try {
@@ -55,7 +58,7 @@ public class EmployeeRepostioryImpl implements EmployeeRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBConnection.closeConnection(connection);
+			dbConnection.closeConnection(connection);
 		}
 		// we have to use a statemnt : PreparedStatement:
 		// 3. perform the exectuion of insert statement.
@@ -82,7 +85,7 @@ public class EmployeeRepostioryImpl implements EmployeeRepository {
 		String query = "select * from employee where empId=?";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		connection = DBConnection.getConnection();
+		connection = dbConnection.getConnection();
 		ResultSet resultSet = null;
 		Employee employee = null;
 		try {
@@ -108,7 +111,7 @@ public class EmployeeRepostioryImpl implements EmployeeRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBConnection.closeConnection(connection);
+			dbConnection.closeConnection(connection);
 		}
 
 		// TODO Auto-generated method stub
@@ -120,7 +123,7 @@ public class EmployeeRepostioryImpl implements EmployeeRepository {
 		String query = "select * from employee";
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		connection = DBConnection.getConnection();
+		connection = dbConnection.getConnection();
 		ResultSet resultSet = null;
 		Employee employee = null;
 		List<Employee> employeeList = new ArrayList<>();
@@ -149,7 +152,7 @@ public class EmployeeRepostioryImpl implements EmployeeRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBConnection.closeConnection(connection);
+			dbConnection.closeConnection(connection);
 		}
 		return null;
 	}

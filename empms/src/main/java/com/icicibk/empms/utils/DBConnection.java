@@ -1,40 +1,47 @@
 package com.icicibk.empms.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
+
+@Component // signleton in utils package.
 public class DBConnection {
+	// 
+	@Value("${db.url}")
+	private  String dbUrl;
+	@Value("${db.userName}")
+	private  String dbUserName;
+	@Value("${db.password}")
+	private  String dbPassword;
+	
 	
 	// get coonection 
 	// read the properties file
-	public static Connection getConnection() {
+	public  Connection getConnection() {
 		
 		Connection connection = null;
 		
+		DBConnection dbConnection = new DBConnection();
 		
-		Properties properties=new Properties();
-		try(InputStream inputStream = DBConnection.class.getClassLoader().
-				getResourceAsStream("application.properties")) {
-			System.out.println(inputStream==null);
-			properties.load(inputStream);
-			System.out.println(properties);
-			connection = DriverManager.getConnection(
-					properties.getProperty("db.url"), 
-					properties.getProperty("db.userName"), 
-					properties.getProperty("db.password"));
+		
+		
+		try {
+			System.out.println(dbConnection.dbUrl);
+			connection = DriverManager.getConnection(dbUrl,dbUserName,dbPassword);
 			return connection;
 			
-		} catch (IOException | SQLException e) {
+		} catch ( SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-	public static void closeConnection(Connection connection) {
+	public void closeConnection(Connection connection) {
 		try {
 			connection.close();
 		} catch (SQLException e) {
